@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h2>List from AWS bucket:</h2>
+    
+     <form action='/filterFiles' method="post">
+      Filter: <input type="text" name="filterValue" placeholder="Please enter a value"> 
+      <input type="submit" value="Filter">
+  </form> 
+
+    <%if(data && data.Contents.length) {
+      var content = data.Contents;
+    %>
+    <ul>
+    <%for(var i=0; i< content.length; i++){  %>
+      <li><%= content[i]['Key'] %></li>
+    <% } %>
+    </ul>
+    <% }  %>
+    <br>
+
+    <hr>
+    <br>
+     
+    <form action='/deleteFiles' method="post">
+      Delete: <input type="text" name="deleteValue" placeholder="Please enter a value"> 
+      <input type="submit" value="Delete">
+   </form> 
+   <br>
+
+    <hr>
+
+    <h2>Upload a file on AWS bucket </h2>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="image_uploads">
+      <input type="submit" value="Upload">
+    </form>
+    
+  </body>
+</html>
